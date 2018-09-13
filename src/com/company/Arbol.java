@@ -5,7 +5,34 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
 
 
     public void insertar(AnyType d) throws Exception {
-        insertar(d, raiz);
+        if (raiz != null)
+            insertar(d, raiz);
+        else
+            raiz = new NodoArbol<>(d);
+    }
+
+    public AnyType buscar(AnyType d) throws Exception {
+        return buscar(d, raiz);
+    }
+
+    public void borrar(AnyType d) throws Exception {
+        borrar(d, raiz);
+    }
+
+    public void inOrder() {
+        inOrder(raiz);
+    }
+
+    public void preOrder() {
+        preOrder(raiz);
+    }
+
+    public void postOrder() {
+        postOrder(raiz);
+    }
+
+    public void print() {
+        print(false, "", raiz);
     }
 
     private void insertar(AnyType d, NodoArbol<AnyType> r) throws Exception {
@@ -26,9 +53,6 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
         }
     }
 
-    public AnyType buscar(AnyType d) throws Exception {
-        return buscar(d, raiz);
-    }
 
     private AnyType buscar(AnyType d, NodoArbol<AnyType> r) throws Exception {
 
@@ -43,10 +67,6 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
             return buscar(d, r.getDer());
         else
             return buscar(d, r.getIzq());
-    }
-
-    public void borrar(AnyType d) throws Exception {
-        borrar(d, raiz);
     }
 
     private NodoArbol<AnyType> borrar(AnyType d, NodoArbol<AnyType> r) throws Exception {
@@ -93,18 +113,15 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
         }
         throw new Exception("El nodo ya existe");
     }
+//
+//    public int altura() {
+//        return altura(raiz);
+//    }
+//
+//    public int profundidad(AnyType d) {
+//        return profundidad(d, raiz);
+//    }
 
-    public int altura() {
-        return altura(raiz);
-    }
-
-    public int profundidad(AnyType d) {
-        return profundidad(d, raiz);
-    }
-
-    public void inOrder() {
-        inOrder(raiz);
-    }
 
     private void inOrder(NodoArbol<AnyType> r) {
 
@@ -128,9 +145,6 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
         */
     }
 
-    public void preOrder() {
-        preOrder(raiz);
-    }
 
     private void preOrder(NodoArbol r) {
         if (r == null)
@@ -141,9 +155,6 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
         preOrder(r.getDer());
     }
 
-    public void postOrder() {
-        postOrder(raiz);
-    }
 
     private void postOrder(NodoArbol r) {
         if (r == null)
@@ -153,6 +164,26 @@ public class Arbol<AnyType extends Comparable<AnyType>> {
         preOrder(r.getDer());
         System.out.println(r.getDato());
     }
+
+
+    private void print(boolean esDerecho, String identacion, NodoArbol<AnyType> r) {
+        if (r.getDer() != null) {
+            print(true, identacion + (esDerecho ? "     " : "|    "), r.getDer());
+        }
+        System.out.print(identacion);
+        if (esDerecho) {
+            System.out.print(" /");
+        } else {
+            System.out.print(" \\");
+        }
+        System.out.print("-- ");
+        System.out.println(r.getDato());
+        if (r.getIzq() != null) {
+            print(false, identacion + (esDerecho ? "|    " : "     "), r.getIzq());
+        }
+    }
+
+
 }
 
 

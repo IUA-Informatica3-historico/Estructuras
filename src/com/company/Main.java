@@ -3,42 +3,15 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
-        QueueArr c = new QueueArr(3);
+        Arbol<Integer> a = new Arbol<>();
+        for (int i = 0; i < 1000; i++)
+            try {
+                a.insertar((int) (Math.random() * 100) + 1);
 
-        System.out.println(c.estaLlena());
-        System.out.println(c.estaVacia());
-        try {
-            c.encolar(1);
-            c.encolar(2);
-            c.encolar(3);
-            System.out.println(c.estaLlena());
-
-            System.out.println(c.desencolar());
-            c.encolar(4);
-            System.out.println(c.desencolar());
-            System.out.println(c.desencolar());
-            System.out.println(c.desencolar());
-            System.out.println(c.estaVacia());
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        try {
-            c.encolar(1);
-            c.encolar(2);
-            c.encolar(3);
-            c.encolar(4);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            c.desencolar();
-            c.desencolar();
-            c.desencolar();
-            c.desencolar();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+            } catch (Exception e) {
+               // System.out.println("Error");
+            }
+        a.print();
     }
+
 }
